@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+    	<Property name="baseDir">D:\INDRAWEB\Logs</Property>
+  	</Properties>
+	<Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss,SSS} [%-5p][%c][%C{1}.%M:%L]: %m%n"/>
+        </Console>
+        
+	    <RollingFile name="fichero"	fileName="${baseDir}/demo-oauth2.log"
+				filePattern="${baseDir}/demo-jasypt-%i.log">
+			<PatternLayout>
+				<Pattern>%d{dd-MM-yyyy HH:mm:ss,SSS} [%-5p][%c][%C{1}.%M:%L]: %m%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="3120KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="3" />
+		</RollingFile>
+		
+    </Appenders>
+	
+	<Loggers>
+		<Logger name="es.jose" level="debug" additivity="false">
+            <AppenderRef ref="fichero"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        
+        <Logger name="org.springframework.security" level="debug" additivity="false">
+            <AppenderRef ref="fichero"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="fichero"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+	</Loggers>
+	
+</Configuration>    
